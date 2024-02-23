@@ -1,0 +1,109 @@
+// Base styles
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%; // Ensure the html and body are full height
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    display: flex; // Set body to be a flex container
+    flex-direction: column; // Stack flex items vertically
+    min-height: 100vh; // Minimum height of viewport
+    margin: 0;
+    padding-top: 60px; // Height of header
+    padding-bottom: 60px; // Height of footer
+  }
+  
+  // Header & Footer
+  header {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  // Container
+  .container {
+    width: 80%;
+    margin: auto; // Center the container
+    display: flex; // Set container to be a flex container
+    flex-direction: column; // Stack flex items vertically
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+    // Form styling
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    
+      label {
+        font-weight: bold;
+      }
+    
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+    
+      button {
+        background: #5cb85c;
+        color: white;
+        border: 0;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    
+        &:hover {
+          background: #4cae4c;
+        }
+      }
+    }
+    
+    // Results styling
+    #results {
+      h2 {
+        margin-bottom: 20px;
+      }
+    
+      ul {
+        list-style: none;
+    
+        li {
+          background: #eee;
+          padding: 10px;
+          margin-bottom: 5px;
+          border-left: 4px solid #5cb85c;
+        }
+      }
+    }
+    

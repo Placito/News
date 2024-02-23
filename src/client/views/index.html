@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>NLP_project</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="container">
+        <section>
+            <form id="myForm" method="post" onsubmit="return Client.handleSubmit(event)">
+                <label for="URI">Enter an Article URL:</label>
+                <input type="text" id="URI" name="URI" />
+                <button type="submit" value="Analyze">Analyze</button>
+            </form>
+        </section>
+        <section>
+            <p id="erro"></p>
+        </section>
+        <section id="results">
+            <h2>Results:</h2>
+            <ul id="resultsList">
+                <li id="agreement"></li>
+                <li id="subjectivity"></li>
+                <li id="confidence"></li>
+                <li id="irony"></li>
+                <li id="score_tag"></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <ul>@udacity-Fend</ul>
+    </footer>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .then(registration => {
+                console.log('Service Worker registered successfully:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+    </script>
+</body>
+</html>
