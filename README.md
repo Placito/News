@@ -35,5 +35,3 @@ Use the following commands to build and run the project:
 |---------------------|---------------------|
 | `npm run build`     | Build the project   |
 | `npm run start`     | Run the project     |
-
-After starting the project, open your browser and go to `http://localhost:8000/`.
