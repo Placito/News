@@ -14,14 +14,14 @@ dotenv.config();
 const MEAN_CLOUD_API_KEY = process.env.API_KEY;
 
 app.get('/', function (req, res) {
-    res.sendFile("index.html", { root: 'dist' }); // Use sendFile for serving HTML files, and specify the root if necessary
+    res.sendFile("index.html", { root: 'dist' }); 
 });
 
 app.post('/analyze', async (req, res) => {
     // 1. GET the url from the request body
     const url = req.body.URI;
     // 2. Fetch Data from API by sending the URL and the key
-    const analyzeResult = await analyze(url, MEAN_CLOUD_API_KEY); // Use camelCase for consistency
+    const analyzeResult = await analyze(url); 
     const { code, msg, sample } = analyzeResult;
     // Send errors if result was wrong
     if (code == 212) {

@@ -8,14 +8,6 @@ analyze = async (url, key) => {
     analysis = await axios.get(`${meaningCloud}?key=${MEAN_CLOUD_API_KEY}&url=${url}&lang=en`)
         .then(function (response) {
             const { code } = response.data.status
-            //handle errors
-            if (code == 100) {
-                const error = handleError(code, "please enter a valid URL")
-                return error
-            } else if (code == 212) {
-                const error = handleError(code, response.data.status.msg)
-                return error
-            }
             return successResponse(response.data, code)
         })
     return analysis
