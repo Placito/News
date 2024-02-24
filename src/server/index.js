@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
     res.sendFile("index.html", { root: 'dist' }); 
 });
 
-app.post('/analyze', async (req, res) => {
+app.post('/', async (req, res) => {
     // 1. GET the url from the request body
     const url = req.body.URI;
     // 2. Fetch Data from API by sending the URL and the key
