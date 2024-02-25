@@ -5,28 +5,34 @@ const app = express();
 app.use(cors());
 const dotenv = require("dotenv");
 const { analyze } = require('./analize'); 
-//middlewares to use
-// app.use(express.urlencoded({extended: true}));
+
+// Middleware to use
 app.use(express.static('dist'));
-app.use(express.json());
+app.use(express.json()); // Parses JSON bodies
 dotenv.config();
 
 const MEAN_CLOUD_API_KEY = process.env.API_KEY;
 
 app.get('/', function (req, res) {
-    res.sendFile("index.html", { root: 'dist' }); 
+    res.sendFile("index.html", { root: 'dist' });
 });
-
-// Middleware to parse JSON bodies
-app.use(express.json());
 
 // POST route to analyze URL
 app.post('/', async (req, res) => {
     try {
         // 1. Get the URL from the request body and validate it
         const url = req.body.URI;
-        if (!url) {
-            return res.status(400).send({ msg: 'Missing or invalid URL', code: 400 });
+        console.log(url);
+        // Simple URL validation
+        const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+
+        if(!urlPattern.test(url)) {
+            return res.status(400).send('Invalid URL');
         }
 
         // 2. Fetch data from API by sending the URL and the key
@@ -37,7 +43,6 @@ app.post('/', async (req, res) => {
         if (code == 212 || code == 100) {
             return res.status(400).send({ msg: msg, code: code });
         }
-
         // 4. Send success response
         return res.status(200).send({ sample: sample, code: code });
     } catch (error) {
