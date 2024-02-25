@@ -24,8 +24,7 @@ const handleSubmit = async (event) => {
     }
 
   try {
-      // Note: This now points to your server-side endpoint
-      const response = await axios.post('/', input.value);
+      const response = await axios.post('/', input.value );
       console.log(response)
 
       if (response.status && response.status.code !== '0') {

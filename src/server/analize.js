@@ -2,12 +2,11 @@ const axios = require("axios");
 
 const meaningCloud = "https://api.meaningcloud.com/sentiment-2.1";
 
-// Removed the unused 'key' parameter, assuming you always use the environment variable for the API key.
 const analyze = async (url) => {
   try {
     const response = await axios.get(`${meaningCloud}`, {
       params: {
-        key: process.env.MEAN_CLOUD_API_KEY,
+        key: MEAN_CLOUD_API_KEY,
         url: url,
         lang: 'en',
       },

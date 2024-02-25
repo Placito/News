@@ -17,20 +17,34 @@ app.get('/', function (req, res) {
     res.sendFile("index.html", { root: 'dist' }); 
 });
 
-app.post('/', async (req, res) => {
-    // 1. GET the url from the request body
-    const url = req.body.URI;
-    // 2. Fetch Data from API by sending the URL and the key
-    const analyzeResult = await analyze(url); 
-    const { code, msg, sample } = analyzeResult;
-    // Send errors if result was wrong
-    if (code == 212) {
-        return res.send({ msg: msg, code: code });
-    } else if (code == 100) {
-        return res.send({ msg: msg, code: code });
-    }
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-    return res.send({ sample: sample, code: code });
+// POST route to analyze URL
+app.post('/', async (req, res) => {
+    try {
+        // 1. Get the URL from the request body and validate it
+        const url = req.body.URI;
+        if (!url) {
+            return res.status(400).send({ msg: 'Missing or invalid URL', code: 400 });
+        }
+
+        // 2. Fetch data from API by sending the URL and the key
+        const analyzeResult = await analyze(url, MEAN_CLOUD_API_KEY);
+        const { code, msg, sample } = analyzeResult;
+
+        // 3. Handle specific error codes from the analyze function
+        if (code == 212 || code == 100) {
+            return res.status(400).send({ msg: msg, code: code });
+        }
+
+        // 4. Send success response
+        return res.status(200).send({ sample: sample, code: code });
+    } catch (error) {
+        // 5. Handle unexpected errors
+        console.error(error);
+        return res.status(500).send({ msg: 'Internal server error', code: 500 });
+    }
 });
 
 app.listen(port, () => console.log(`Server is now listening on port ${port}`));
