@@ -2,7 +2,7 @@ import axios from 'axios';
 import { validateURL } from './checkURL';
 
 // check what text was put into the form field
-const input = document.getElementById('URI');
+const URI = document.getElementById('URI').value;
 const erro = document.getElementById("erro");
 const agreement = document.getElementById('agreement');
 const subjectivity = document.getElementById('subjectivity');
@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
-    if (!validateURL(input.value)) {
+    if (!validateURL(URI)) {
         show_error("Please, enter a valid URL.");
         return;
     }
 
   try {
-      const response = await axios.post('/', input.value );
+      const response = await axios.post('/', URI );
       console.log(response)
 
       if (response.status && response.status.code !== '0') {
