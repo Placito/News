@@ -55,6 +55,7 @@ const show_error = (msg) => {
 // Display result data
 const show_results = (data) => {
     results.style.display = "block";
+    erro.style.display = "none";
     agreement.innerHTML = `Agreement: ${data.sample.agreement}`;
     subjectivity.innerHTML = `Subjectivity: ${data.sample.subjectivity}`;
     confidence.innerHTML = `Confidence: ${data.sample.confidence}`;
